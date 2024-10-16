@@ -15,11 +15,6 @@ from swarms_memory import ChromaDB
 import asyncio
 app = FastAPI()
 
-agent_output_type = Literal[
-    "string", "str", "list", "json", "dict", "yaml"
-]
-ToolUsageType = Union[BaseModel, Dict[str, Any]]
-
 # Define a Pydantic model for the request body
 class AgentRequest(BaseModel):
     agent_config: dict
