@@ -40,18 +40,10 @@ async def run_agent(request: AgentRequest):
         raise HTTPException(status_code=500, detail="An internal error occurred.")
 
 def create_agent(agent_config):
-    # Initialize the language model
-    model = OpenAIChat(
-        api_key=os.getenv("OPENAI_API_KEY"),
-        # Use predefined model settings
-        model_name='gpt-4o-mini',
-        temperature=agent_config.temperature,
-    )
-
     agent = Agent(
         agent_id=agent_config.get('agent_id', None),
         id=agent_config.get('id', None),
-        llm=model,
+        llm=agent_config.get('llm', None),
         template=agent_config.get('template', None),
         max_loops=agent_config.get('max_loops', 2),
         stopping_condition=agent_config.get('stopping_condition', None),
